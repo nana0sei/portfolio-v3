@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
-import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import logoB from "@/app/assets/logoB.png";
 import logoW from "@/app/assets/logoW.png";
-import RecentlyPlayedCard from "./RecentlyPlayedCard";
-import Link from "next/link";
+import { Switch } from "@/components/ui/switch";
+import { Moon, Sun } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import RecentlyPlayedCard from "./RecentlyPlayedCard";
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
@@ -22,17 +23,12 @@ const Navbar = () => {
       </Link>
       <RecentlyPlayedCard />
       <div className="flex items-center gap-1">
-        <input
-          type="checkbox"
-          className="toggle toggle-info"
+        <Switch
           checked={theme === "light"}
-          onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
         />
-        {theme === "light" ? (
-          <BsSun size="20px" />
-        ) : (
-          <BsFillMoonFill size="15px" />
-        )}
+
+        {theme === "light" ? <Sun size={20} /> : <Moon size={20} />}
       </div>{" "}
     </nav>
   );
