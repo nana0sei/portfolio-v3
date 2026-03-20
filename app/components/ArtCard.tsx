@@ -1,32 +1,27 @@
-import { CldImage } from "next-cloudinary";
-import useCloudinary from "../hooks/useCloudinary";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Artwork } from "@/lib/entities";
+import { CldImage } from "next-cloudinary";
 
 interface Props {
   art: Artwork;
 }
 const ArtCard = ({ art }: Props) => {
-  const { image } = useCloudinary(art.url);
   return (
     <>
-      <div
-        className="hover:scale-95 transition-transform overflow-clip cursor-pointer rounded-lg bg-slate-200 dark:bg-slate-100"
-        onClick={() => {
-          //@ts-expect-error: issue with daisy ui. works anyway
-          document.getElementById(`modal-${art.url}`)!.showModal();
-        }}
-      >
-        <CldImage src={art.url} width={600} height={600} alt="artwork" />
-      </div>{" "}
-      {/* dialog */}
-      <dialog id={`modal-${art.url}`} className="modal">
-        <div className="modal-box space-y-1 p-2 bg-white dark:text-black">
+      <Dialog>
+        <DialogTrigger
+          render={
+            <button className="rounded-lg overflow-clip hover:scale-95 transition-transform cursor-pointer">
+              <CldImage src={art.url} width={600} height={600} alt="artwork" />
+            </button>
+          }
+        >
+          Show Dialog
+        </DialogTrigger>
+        <DialogContent className={"min-w-fit"}>
           <CldImage src={art.url} width={600} height={600} alt="artwork" />
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
