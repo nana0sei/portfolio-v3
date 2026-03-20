@@ -18,7 +18,7 @@ const ArtCard = ({ art }: Props) => {
         >
           Show Dialog
         </DialogTrigger>
-        <DialogContent className={"min-w-fit"}>
+        <DialogContent className={"min-w-fit"} showCloseButton={false}>
           <CldImage src={art.url} width={600} height={600} alt="artwork" />
         </DialogContent>
       </Dialog>
