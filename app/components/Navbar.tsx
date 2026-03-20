@@ -11,7 +11,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
 
   return (
-    <div className="flex justify-between items-center sticky top-0 p-3 mb-5  z-10 gap-2">
+    <nav className="w-full flex justify-between p-3 sticky top-0 z-10 bg-background">
       <Link href="/">
         <Image
           src={theme === "light" ? logoB : logoW}
@@ -34,7 +34,7 @@ const Navbar = () => {
           <BsFillMoonFill size="15px" />
         )}
       </div>{" "}
-    </div>
+    </nav>
   );
 };
 

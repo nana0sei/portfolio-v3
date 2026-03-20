@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Provider from "./providers/Provider";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -25,7 +26,10 @@ export default function RootLayout({
         <Provider>
           <Navbar />
 
-          {children}
+          <div className="h-screen overflow-y-scroll no-scrollbar space-y-2 px-2">
+            {children}
+          </div>
+          <Footer />
         </Provider>
       </body>
     </html>
