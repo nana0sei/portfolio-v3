@@ -1,4 +1,4 @@
-import Tracks from "@/lib/entities";
+import { Tracks } from "@/lib/entities";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { add } from "date-fns";
