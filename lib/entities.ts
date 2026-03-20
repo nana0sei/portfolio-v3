@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 interface ImageObject {
   url: string;
   height: number;
@@ -37,9 +39,16 @@ interface SimplifiedTrackObject {
   };
 }
 
-interface Tracks {
+export interface Tracks {
   total: number;
   items: SimplifiedTrackObject[];
 }
 
-export default Tracks;
+export interface Project {
+  link: string;
+  name: string;
+  description: string;
+  image: StaticImageData;
+  git?: string;
+  tools: string[];
+}

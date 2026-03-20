@@ -1,8 +1,9 @@
 import { AiFillGithub } from "react-icons/ai";
 import { FiExternalLink } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import placeholder from "../assets/placeholder.png";
-import { Project } from "../entities/Project";
+import placeholder from "@/app/assets/placeholder.png";
+import { Project } from "@/lib/entities";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   project: Project;
@@ -13,28 +14,26 @@ const DevCard = ({ project }: Props) => {
     <>
       <div className="card bg-base-100 shadow-xl">
         <figure>
-          <img src={project.image || placeholder} alt={project.name} />
+          <Image
+            width={1000}
+            height={1000}
+            src={project.image || placeholder}
+            alt={project.name}
+            className="w-full object-cover"
+          />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
             <div className="flex gap-1">
               <p> {project.name}</p>
               {project.link && (
-                <Link
-                  to={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={project.link} target="_blank">
                   <FiExternalLink size="25px" />
                 </Link>
               )}
 
               {project.git && (
-                <Link
-                  to={project.git}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={project.git} target="_blank">
                   <AiFillGithub size="25px" />
                 </Link>
               )}
