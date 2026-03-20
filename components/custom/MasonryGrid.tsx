@@ -1,6 +1,6 @@
 "use client";
 import useCloudinaryImages from "@/app/hooks/useCloudinary";
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import Masonry from "react-masonry-css";
 import { Skeleton } from "../ui/skeleton";
 const ArtCard = lazy(() => import("@/components/custom/ArtCard"));
