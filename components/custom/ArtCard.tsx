@@ -16,7 +16,7 @@ const ArtCard = ({ art }: Props) => {
                 src={art.public_id}
                 width={600}
                 height={600}
-                alt="artwork"
+                alt={art.public_id}
               />
             </button>
           }

@@ -15,7 +15,7 @@ export async function GET() {
       {
         headers: { Authorization: "Basic " + token },
         params: {
-          max_results: "100",
+          max_results: 100,
           prefix: "portfolio",
           type: "upload",
         },
