@@ -1,6 +1,6 @@
-import { Artwork } from "../entities/Artwork";
-import { AdvancedImage } from "@cloudinary/react";
+import { CldImage } from "next-cloudinary";
 import useCloudinary from "../hooks/useCloudinary";
+import { Artwork } from "@/lib/entities";
 
 interface Props {
   art: Artwork;
@@ -16,12 +16,12 @@ const ArtCard = ({ art }: Props) => {
           document.getElementById(`modal-${art.url}`)!.showModal();
         }}
       >
-        <AdvancedImage cldImg={image} />
+        <CldImage src={art.url} width={600} height={600} alt="artwork" />
       </div>{" "}
       {/* dialog */}
       <dialog id={`modal-${art.url}`} className="modal">
         <div className="modal-box space-y-1 p-2 bg-white dark:text-black">
-          <AdvancedImage cldImg={image} />
+          <CldImage src={art.url} width={600} height={600} alt="artwork" />
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>

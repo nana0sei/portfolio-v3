@@ -1,7 +1,7 @@
 "use client";
 import { lazy, Suspense } from "react";
 import photos from "@/lib/data/photos";
-const ArtCard = lazy(() => import("../components/ArtCard"));
+const ArtCard = lazy(() => import("@/app/components/ArtCard"));
 import Masonry from "react-masonry-css";
 
 const MasonryGrid = () => {
