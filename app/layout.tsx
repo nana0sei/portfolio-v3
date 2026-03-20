@@ -1,16 +1,9 @@
+import Navbar from "@/components/custom/Navbar";
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Merriweather,
-  Merriweather_Sans,
-  Open_Sans,
-  Roboto,
-} from "next/font/google";
+import { Open_Sans } from "next/font/google";
+import Footer from "../components/custom/Footer";
 import "./globals.css";
 import Provider from "./providers/Provider";
-import Footer from "../components/custom/Footer";
-import Navbar from "@/components/custom/Navbar";
 
 const open_sans = Open_Sans({
   variable: "--font-open-sans",

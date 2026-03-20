@@ -1,6 +1,6 @@
 import Link from "next/link";
-import useRecentlyPlayed from "../hooks/useRecentlyPlayed";
 import Image from "next/image";
+import useRecentlyPlayed from "@/app/hooks/useRecentlyPlayed";
 
 const RecentlyPlayedCard = () => {
   const { data: tracks, isLoading, error } = useRecentlyPlayed();
