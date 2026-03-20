@@ -52,3 +52,8 @@ export interface Project {
   git?: string;
   tools: string[];
 }
+
+export interface Artwork {
+  url: string;
+  description: string;
+}
