@@ -3,8 +3,15 @@ import { lazy, Suspense } from "react";
 import photos from "@/lib/data/photos";
 const ArtCard = lazy(() => import("@/components/custom/ArtCard"));
 import Masonry from "react-masonry-css";
+import { useCloudinaryImages } from "@/app/hooks/useCloudinary";
 
 const MasonryGrid = () => {
+  const { data, isLoading } = useCloudinaryImages();
+
+  if (isLoading) return <p>loading...</p>;
+
+  console.log(data);
+
   return (
     <div>
       <Masonry

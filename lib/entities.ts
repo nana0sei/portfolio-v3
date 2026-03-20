@@ -57,3 +57,25 @@ export interface Artwork {
   url: string;
   description: string;
 }
+
+export interface CloudinaryImage {
+  asset_id: string;
+  public_id: string;
+  format: string;
+  version: number;
+  resource_type: string;
+  type: string;
+  placeholder: boolean;
+  created_at: string;
+  bytes: number;
+  width: number;
+  height: number;
+  backup: boolean;
+  folder: string;
+  url: string;
+  secure_url: string;
+}
+
+export interface CloudinaryImages {
+  resources: CloudinaryImage[];
+}
