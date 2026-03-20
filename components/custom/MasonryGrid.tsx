@@ -1,16 +1,13 @@
 "use client";
+import useCloudinaryImages from "@/app/hooks/useCloudinary";
 import { lazy, Suspense } from "react";
-import photos from "@/lib/data/photos";
-const ArtCard = lazy(() => import("@/components/custom/ArtCard"));
 import Masonry from "react-masonry-css";
-import { useCloudinaryImages } from "@/app/hooks/useCloudinary";
+const ArtCard = lazy(() => import("@/components/custom/ArtCard"));
 
 const MasonryGrid = () => {
   const { data, isLoading } = useCloudinaryImages();
 
   if (isLoading) return <p>loading...</p>;
-
-  console.log(data);
 
   return (
     <div>
@@ -19,10 +16,10 @@ const MasonryGrid = () => {
         className="flex gap-2 pb-32"
         columnClassName="space-y-2"
       >
-        {photos.map((artwork, index) => (
+        {data?.resources.map((artwork, index) => (
           <div key={index} className="rounded-lg">
             <Suspense fallback={<div className="skeleton h-72 w-full" />}>
-              <ArtCard art={artwork} key={artwork.description} />
+              <ArtCard art={artwork} key={artwork.public_id} />
             </Suspense>
           </div>
         ))}
