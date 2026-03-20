@@ -1,6 +1,6 @@
 import Image from "next/image";
 import dev from "@/app/assets/devtitle.png";
-import DevCard from "../components/DevCard";
+import DevCard from "../../components/custom/DevCard";
 import projects from "@/lib/data/projects";
 
 const DevPage = () => {

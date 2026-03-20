@@ -9,8 +9,8 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import Provider from "./providers/Provider";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Footer from "../components/custom/Footer";
+import Navbar from "@/components/custom/Navbar";
 
 const open_sans = Open_Sans({
   variable: "--font-open-sans",

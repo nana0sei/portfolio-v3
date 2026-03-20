@@ -1,6 +1,6 @@
 import art from "@/app/assets/arttitle.png";
 import Image from "next/image";
-import MasonryGrid from "../components/MasonryGrid";
+import MasonryGrid from "../../components/custom/MasonryGrid";
 
 const ArtPage = () => {
   return (
