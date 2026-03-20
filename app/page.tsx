@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import art from "@/app/assets/art.png";
 import dev from "@/app//assets/dev.png";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
     <>
       <div className="space-y-3 pb-32">
+        <Button>Hello</Button>
         <div className="flex flex-col justify-center items-center space-y-1 text-center">
           {/* title */}
           <div className="text-xl md:text-4xl font-bold">
@@ -27,6 +29,7 @@ export default function Home() {
                   width={500}
                   height={500}
                   className="hover:scale-90 transition-transform"
+                  loading="eager"
                 />
               </Link>
             </div>

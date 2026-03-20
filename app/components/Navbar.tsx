@@ -11,7 +11,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
 
   return (
-    <div className="flex justify-between items-center sticky top-0 p-3 mb-5 bg-base-100 z-10 gap-2">
+    <div className="flex justify-between items-center sticky top-0 p-3 mb-5  z-10 gap-2">
       <Link href="/">
         <Image
           src={theme === "light" ? logoB : logoW}
