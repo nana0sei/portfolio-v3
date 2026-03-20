@@ -1,11 +1,14 @@
 "use client";
 import { PropsWithChildren } from "react";
 import QueryClientProvider from "./QueryClientProvider";
+import ThemeProvider from "./ThemeProvider";
 
 const Provider = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <QueryClientProvider>{children}</QueryClientProvider>
+      <ThemeProvider attribute={"class"} defaultTheme="light" enableSystem>
+        <QueryClientProvider>{children}</QueryClientProvider>
+      </ThemeProvider>
     </>
   );
 };

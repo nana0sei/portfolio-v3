@@ -5,11 +5,11 @@ import { Switch } from "@/components/ui/switch";
 import { Moon, Sun } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import RecentlyPlayedCard from "./RecentlyPlayedCard";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
-  const [theme, setTheme] = useState("light");
+  const { theme, setTheme } = useTheme();
 
   return (
     <nav className="w-full flex justify-between p-3 sticky top-0 z-10 bg-background">
