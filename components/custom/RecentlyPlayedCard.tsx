@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import useRecentlyPlayed from "@/app/hooks/useRecentlyPlayed";
+import { Skeleton } from "../ui/skeleton";
 
 const RecentlyPlayedCard = () => {
   const { data: tracks, isLoading, error } = useRecentlyPlayed();
 
-  if (isLoading) return <div className="skeleton w-60 h-16" />;
+  if (isLoading) return <Skeleton className="w-60 h-16" />;
 
   if (error) return null;
 
