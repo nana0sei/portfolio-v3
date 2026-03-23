@@ -11,14 +11,12 @@ export async function GET() {
     const token = Buffer.from(`${api_key}:${api_secret}`).toString("base64");
 
     const res = await axios.get<CloudinaryImages>(
-      `https://api.cloudinary.com/v1_1/${cloud_name}/resources/image`,
+      `https://api.cloudinary.com/v1_1/${cloud_name}/resources/search`,
       {
         headers: { Authorization: "Basic " + token },
         params: {
           max_results: 100,
-          prefix: "portfolio",
-          type: "upload",
-          direction: "desc",
+          expression: "folder:portfolio",
         },
       },
     );

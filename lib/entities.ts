@@ -77,5 +77,7 @@ export interface CloudinaryImage {
 }
 
 export interface CloudinaryImages {
+  total_count: number;
+  time: number;
   resources: CloudinaryImage[];
 }
