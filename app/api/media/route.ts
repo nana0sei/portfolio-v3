@@ -18,6 +18,7 @@ export async function GET() {
           max_results: 100,
           prefix: "portfolio",
           type: "upload",
+          direction: "desc",
         },
       },
     );
