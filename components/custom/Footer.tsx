@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="flex flex-col items-center w-full p-2 fixed bottom-0  bg-background z-10 mt-5">
+      <footer className="flex flex-col items-center w-full p-2 bg-background z-10 mt-5">
         <div className="divider">© {year} Nana Osei</div>
         <div className="flex items-center justify-center gap-2">
           {links.map((link) => (

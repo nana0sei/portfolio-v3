@@ -12,7 +12,7 @@ const MasonryGrid = () => {
     return (
       <Masonry
         breakpointCols={3}
-        className="flex gap-2 pb-32"
+        className="flex gap-2"
         columnClassName="space-y-2"
       >
         {[1, 2, 3, 4, 5, 6].map((i) => (

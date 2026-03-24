@@ -5,7 +5,7 @@ import MasonryGrid from "../../components/custom/MasonryGrid";
 const ArtPage = () => {
   return (
     <>
-      <div className="h-screen space-y-2">
+      <div className="space-y-2">
         <div className="flex justify-center">
           <Image src={art} alt="art" width={250} height={250} />
         </div>
