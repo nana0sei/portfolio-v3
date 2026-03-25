@@ -10,22 +10,22 @@ const LoopingText = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 1500);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <span className="italic text-blue-400">
+    <span className="italic text-blue-400 min-w-50">
       <AnimatePresence mode="wait">
-        <motion.span
+        <motion.div
           key={words[index]}
-          initial={{ y: "-100%", opacity: 0 }}
+          initial={{ y: "-50%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "0%", opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           {words[index]}.
-        </motion.span>
+        </motion.div>
       </AnimatePresence>
     </span>
   );

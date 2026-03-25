@@ -9,8 +9,7 @@ export default function Home() {
     <>
       <div className="space-y-3">
         <div className="flex flex-col justify-center items-center space-y-1 text-center">
-          {/* title */}
-          <div className="flex w-full justify-center items-center gap-1 text-xl md:text-4xl font-bold">
+          <div className="gap-1 text-xl md:text-4xl font-bold">
             hi, my name is <span className="italic text-yellow-400">nana.</span>{" "}
             i'm a <LoopingText />
           </div>
