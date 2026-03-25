@@ -9,7 +9,7 @@ const DevPage = () => {
       <div className="flex justify-center">
         <Image src={dev} alt="dev" width={250} height={250} />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects.map((project) => (
           <DevCard project={project} key={project.name} />
         ))}
