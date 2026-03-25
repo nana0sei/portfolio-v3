@@ -1,5 +1,6 @@
 import dev from "@/app//assets/dev.png";
 import art from "@/app/assets/art.png";
+import LoopingText from "@/components/custom/LoopingText";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,11 +10,13 @@ export default function Home() {
       <div className="space-y-3">
         <div className="flex flex-col justify-center items-center space-y-1 text-center">
           {/* title */}
-          <div className="text-xl md:text-4xl font-bold">
+          <div className="flex w-full justify-center items-center gap-1 text-xl md:text-4xl font-bold">
             hi, my name is <span className="italic text-yellow-400">nana.</span>{" "}
-            i'm a{" "}
-            <span className="italic text-blue-400">software engineer</span> and
-            a <span className="italic text-blue-400">digital artist.</span>
+            i'm a <LoopingText />
+          </div>
+          <div className="text-sm">
+            i create intuitive and functional designs which reflect both of my
+            interests. check out my work below!
           </div>
         </div>
 

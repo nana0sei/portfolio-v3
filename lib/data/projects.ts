@@ -14,7 +14,8 @@ const projects: Project[] = [
 
   {
     name: "portfolio",
-    description: "here.",
+    description:
+      "you can see my dev projects, art and recently played music here.",
     image: portfolio,
     link: "https://www.nanaosei.xyz",
     git: "",
