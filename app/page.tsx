@@ -14,7 +14,7 @@ export default function Home() {
             i'm a <LoopingText />
           </div>
           <div className="text-sm">
-            i create intuitive and functional designs which reflect both of my
+            i create intuitive and functional experiences which reflect both of my
             interests. check out my work below!
           </div>
         </div>
