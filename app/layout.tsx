@@ -30,9 +30,7 @@ export default function RootLayout({
         <Provider>
           <Navbar />
 
-          <div className="h-screen overflow-y-scroll no-scrollbar space-y-2 px-2">
-            {children}
-          </div>
+          <div className="flex-1 no-scrollbar space-y-2 px-2">{children}</div>
           <Footer />
         </Provider>
       </body>

@@ -5,7 +5,7 @@ import projects from "@/lib/data/projects";
 
 const DevPage = () => {
   return (
-    <div className="h-screen space-y-2">
+    <div className="space-y-2">
       <div className="flex justify-center">
         <Image src={dev} alt="dev" width={250} height={250} />
       </div>
