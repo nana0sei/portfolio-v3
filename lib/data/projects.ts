@@ -1,5 +1,6 @@
 import loangrid from "@/app/assets/loangrid.png";
 import portfolio from "@/app/assets/portfolio.png";
+import faithhq from "@/app/assets/fhq.png";
 import { Project } from "../entities";
 
 const projects: Project[] = [
@@ -20,6 +21,15 @@ const projects: Project[] = [
     link: "https://www.nanaosei.xyz",
     git: "",
     tools: ["react", "typescript", "tailwind"],
+  },
+
+  {
+    name: "faith hq",
+    description: "a church management system",
+    image: faithhq,
+    link: "https://logicielghana.com/platorms/platforms/fathhq",
+    git: "",
+    tools: [],
   },
 ];
 
