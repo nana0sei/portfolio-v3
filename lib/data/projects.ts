@@ -25,7 +25,7 @@ const projects: Project[] = [
 
   {
     name: "faith hq",
-    description: "a church management system",
+    description: "a church management system.",
     image: faithhq,
     link: "https://logicielghana.com/platorms/platforms/fathhq",
     git: "",
