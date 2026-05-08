@@ -14,42 +14,41 @@ const RecentlyPlayedCard = () => {
 
   return (
     <>
-      <div className="rounded-lg bg-slate-50 dark:bg-zinc-800 shadow-md p-2 w-60 min-h-16">
+      <Link
+        href={latest_song.track.external_urls.spotify!}
+        target="_blank"
+        className="rounded-lg bg-slate-50 dark:bg-zinc-800 shadow-md p-2 w-60 hover:scale-95 transition-transform"
+      >
         <div className="flex gap-2 items-center">
           <Image
             src={latest_song.track.album.images[0].url}
             alt="nana icon"
-            width={48}
-            height={48}
-            className="rounded-lg overflow-clip"
+            width={30}
+            height={30}
+            className="rounded-md overflow-clip"
           />
           <div>
-            <Link
-              href={latest_song.track.external_urls.spotify!}
-              target="_blank"
-            >
-              <p className="font-semibold text-blue-400 hover:underline">
-                {latest_song.track.name.length > 20
-                  ? `${latest_song.track.name.slice(0, 15)}...`
-                  : latest_song.track.name}
-              </p>
-            </Link>
-
             {latest_song.track.artists.map((a) => a.name).join(", ").length >
             25 ? (
               <div className="marquee-wrapper">
-                <p className="text-sm marquee">
+                <div className="text-sm marquee">
+                  <span className="text-blue-400">
+                    {latest_song.track.name}
+                  </span>{" "}
+                  {latest_song.track.name} &mdash;{" "}
                   {latest_song.track.artists.map((a) => a.name).join(", ")}
-                </p>
+                </div>
               </div>
             ) : (
               <p className="text-sm">
+                <span className="text-blue-400">{latest_song.track.name}</span>{" "}
+                &mdash;{" "}
                 {latest_song.track.artists.map((a) => a.name).join(", ")}
               </p>
             )}
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
