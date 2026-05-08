@@ -6,7 +6,7 @@ import ThemeProvider from "./ThemeProvider";
 const Provider = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <ThemeProvider attribute={"class"} defaultTheme="dark" enableSystem>
+      <ThemeProvider attribute={"class"} defaultTheme="light" enableSystem>
         <QueryClientProvider>{children}</QueryClientProvider>
       </ThemeProvider>
     </>

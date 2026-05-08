@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full flex justify-center items-center gap-2 p-3 bg-background/10 backdrop-blur-3xl sticky top-0 z-10">
+    <nav className="w-full flex justify-center items-center gap-2 p-3 bg-background/10 backdrop-blur-2xl sticky top-0 z-10">
       <Link href="/">
         <Image
           src={theme === "light" ? logoB : logoW}
@@ -29,7 +29,7 @@ const Navbar = () => {
       </Link>
       <RecentlyPlayedCard />
       <Button variant={"outline"} onClick={toggleTheme}>
-        {theme === "light" ? <Sun size={20} /> : <Moon size={20} />}
+        {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
       </Button>
     </nav>
   );
