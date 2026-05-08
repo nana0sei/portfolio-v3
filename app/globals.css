@@ -130,7 +130,7 @@
 }
 
 .marquee-wrapper {
-  max-width: 100px;
+  max-width: 220px;
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;

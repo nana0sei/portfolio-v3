@@ -6,18 +6,23 @@ import { Skeleton } from "../ui/skeleton";
 const RecentlyPlayedCard = () => {
   const { data: tracks, isLoading, error } = useRecentlyPlayed();
 
-  if (isLoading) return <Skeleton className="w-60 h-16" />;
+  if (isLoading) return <Skeleton className="w-60 h-12" />;
 
   if (error) return null;
 
   const latest_song = tracks?.items[0]!;
+  const latest_song_title = tracks?.items[0]!.track.name;
+  const latest_song_artists = tracks?.items[0]!.track.artists.map(
+    (a) => a.name,
+  ).join(", ");
+  const latest_song_label = `${latest_song_title} ${latest_song_artists}`;
 
   return (
     <>
       <Link
         href={latest_song.track.external_urls.spotify!}
         target="_blank"
-        className="rounded-lg bg-slate-50 dark:bg-zinc-800 shadow-md p-2 w-60 hover:scale-95 transition-transform"
+        className="rounded-lg bg-slate-50 dark:bg-zinc-800 shadow-md p-2 w-60 h-12 hover:scale-95 transition-transform overflow-hidden"
       >
         <div className="flex gap-2 items-center">
           <Image
@@ -28,20 +33,21 @@ const RecentlyPlayedCard = () => {
             className="rounded-md overflow-clip"
           />
           <div>
-            {latest_song.track.artists.map((a) => a.name).join(", ").length >
-            25 ? (
-              <div className="marquee-wrapper">
-                <div className="text-sm marquee">
-                  <span className="text-blue-400">
+            {latest_song_label.length > 25 ? (
+              <div className="marquee-wrapper w-full">
+                <p className="text-sm marquee">
+                  <span className="text-blue-400 font-semibold">
                     {latest_song.track.name}
                   </span>{" "}
-                  {latest_song.track.name} &mdash;{" "}
+                  &mdash;{" "}
                   {latest_song.track.artists.map((a) => a.name).join(", ")}
-                </div>
+                </p>
               </div>
             ) : (
               <p className="text-sm">
-                <span className="text-blue-400">{latest_song.track.name}</span>{" "}
+                <span className="text-blue-400 font-semibold">
+                  {latest_song.track.name}
+                </span>{" "}
                 &mdash;{" "}
                 {latest_song.track.artists.map((a) => a.name).join(", ")}
               </p>
