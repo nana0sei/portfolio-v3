@@ -30,7 +30,7 @@ const RecentlyPlayedCard = () => {
             alt="nana icon"
             width={30}
             height={30}
-            className="rounded-md overflow-clip"
+            className="overflow-clip"
           />
           <div>
             {latest_song_label.length > 20 ? (
