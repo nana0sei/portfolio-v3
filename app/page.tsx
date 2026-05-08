@@ -13,7 +13,7 @@ export default function Home() {
             hi, my name is <span className="italic text-yellow-400">nana.</span>{" "}
             i'm a <LoopingText />
           </div>
-          <div className="text-sm">
+          <div>
             i create intuitive and functional experiences which reflect all of
             my interests. check out my work below!
           </div>
