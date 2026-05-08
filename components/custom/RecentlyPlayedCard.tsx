@@ -33,7 +33,7 @@ const RecentlyPlayedCard = () => {
             className="rounded-md overflow-clip"
           />
           <div>
-            {latest_song_label.length > 25 ? (
+            {latest_song_label.length > 22 ? (
               <div className="marquee-wrapper w-full">
                 <p className="text-sm marquee">
                   <span className="text-blue-400 font-semibold">

@@ -1,6 +1,6 @@
 import Navbar from "@/components/custom/Navbar";
 import type { Metadata } from "next";
-import { Open_Sans, Raleway } from "next/font/google";
+import { Raleway } from "next/font/google";
 import Footer from "../components/custom/Footer";
 import "./globals.css";
 import Provider from "./providers/Provider";
@@ -28,9 +28,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Provider>
-          <Navbar />
+          <div className="flex-1 no-scrollbar space-y-2 px-2">
+            <Navbar />
 
-          <div className="flex-1 no-scrollbar space-y-2 px-2">{children}</div>
+            {children}
+          </div>
           <Footer />
         </Provider>
       </body>

@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full flex justify-center items-center gap-2 p-3 bg-background/10 backdrop-blur-2xl sticky top-0 z-10">
+    <nav className="w-full flex justify-center items-center gap-2 p-3 bg-background/10 backdrop-blur-2xl sticky top-2 rounded-lg z-10">
       <Link href="/">
         <Image
           src={theme === "light" ? logoB : logoW}
