@@ -1,4 +1,5 @@
 import placeholder from "@/app/assets/placeholder.png";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Project } from "@/lib/entities";
 import { SquareArrowOutUpRight } from "lucide-react";
@@ -41,6 +42,11 @@ const DevCard = ({ project }: Props) => {
             )}
           </div>
           <p className="italic">{project.description}</p>
+          <div className="flex flex-wrap gap-1 pt-1">
+            {project.tools.map((tool) => (
+              <Badge key={tool} variant="secondary">{tool}</Badge>
+            ))}
+          </div>
         </CardContent>
       </Card>
     </>

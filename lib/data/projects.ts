@@ -11,7 +11,7 @@ const projects: Project[] = [
     image: loangrid,
     link: "https://logicielghana.com/platorms/platforms/loangrid",
     git: "",
-    tools: ["nextjs", "tailwind", "shadcn/ui"],
+    tools: ["nextjs", "shadcn/ui", "tanstack query"],
   },
 
   {
@@ -21,16 +21,22 @@ const projects: Project[] = [
     image: portfolio,
     link: "https://www.nanaosei.xyz",
     git: "",
-    tools: ["react", "typescript", "tailwind"],
+    tools: [
+      "nextjs",
+      "shadcn/ui",
+      "tanstack query",
+      "cloudinary",
+      "spotify api",
+    ],
   },
 
   {
     name: "faith hq",
-    description: "a church management system.",
+    description: "a church management system",
     image: fhq,
     link: "https://logicielghana.com/platorms/platforms/fathhq",
     git: "",
-    tools: [],
+    tools: ["nextjs", "daisy ui", "tanstack query", "redux"],
   },
 ];
 
