@@ -64,8 +64,8 @@ const RecentlyPlayedCard = () => {
             <Image
               src={item.track.album.images[0].url}
               alt={item.track.name}
-              width={30}
-              height={30}
+              width={32}
+              height={32}
               className="rounded-sm overflow-clip shrink-0"
             />
             <div className="text-sm">
