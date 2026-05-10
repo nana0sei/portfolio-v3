@@ -68,7 +68,7 @@ const RecentlyPlayedCard = () => {
               height={32}
               className="rounded-sm overflow-clip shrink-0"
             />
-            <div className="text-sm">
+            <div className="text-sm min-w-0">
               <div className="text-blue-400 font-semibold truncate">
                 {item.track.name}
               </div>
