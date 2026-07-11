@@ -14,8 +14,8 @@ const ArtCard = ({ art }: Props) => {
             <button className="rounded-lg overflow-clip hover:scale-95 transition-transform cursor-pointer">
               <CldImage
                 src={art.public_id}
-                width={600}
-                height={600}
+                width={500}
+                height={500}
                 alt="artwork"
               />
             </button>
@@ -26,8 +26,8 @@ const ArtCard = ({ art }: Props) => {
         <DialogContent className={"min-w-fit bg-white"} showCloseButton={false}>
           <CldImage
             src={art.public_id}
-            width={600}
-            height={600}
+            width={500}
+            height={500}
             alt="artwork"
           />
         </DialogContent>
