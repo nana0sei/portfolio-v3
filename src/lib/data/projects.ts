@@ -21,13 +21,7 @@ const projects: Project[] = [
     image: portfolio,
     link: "https://www.nanaosei.xyz",
     git: "",
-    tools: [
-      "nextjs",
-      "shadcn/ui",
-      "tanstack query",
-      "cloudinary",
-      "spotify api",
-    ],
+    tools: ["tanstack start", "shadcn/ui", "cloudinary", "spotify api"],
   },
 
   {
