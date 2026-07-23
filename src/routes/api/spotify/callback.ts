@@ -116,21 +116,26 @@ export const Route = createFileRoute("/api/spotify/callback")({
         }
 
         const owner_id = process.env.SPOTIFY_USER_ID;
-        if (owner_id) {
-          if (user_id !== owner_id) {
-            return error_page(
-              403,
-              "That Spotify account is not the owner of this site.",
-            );
-          }
-        } else if (process.env.NODE_ENV === "production") {
-          // Fail closed: without SPOTIFY_USER_ID there is nothing to check the
-          // authorizing account against.
-          return error_page(
-            403,
-            "SPOTIFY_USER_ID is not set, so ownership cannot be verified. Set it before authorizing in production.",
-          );
-        }
+
+        // Owner gating — disabled for now. Re-enable by uncommenting once
+        // SPOTIFY_USER_ID is populated (the page below prints the id of
+        // whichever account just authorized).
+        //
+        // if (owner_id) {
+        //   if (user_id !== owner_id) {
+        //     return error_page(
+        //       403,
+        //       "That Spotify account is not the owner of this site.",
+        //     );
+        //   }
+        // } else if (process.env.NODE_ENV === "production") {
+        //   // Fail closed: without SPOTIFY_USER_ID there is nothing to check
+        //   // the authorizing account against.
+        //   return error_page(
+        //     403,
+        //     "SPOTIFY_USER_ID is not set, so ownership cannot be verified. Set it before authorizing in production.",
+        //   );
+        // }
 
         if (!token.refresh_token) {
           return error_page(
@@ -139,10 +144,11 @@ export const Route = createFileRoute("/api/spotify/callback")({
           );
         }
 
-        const bootstrap = owner_id
-          ? ""
-          : `<p class="muted">SPOTIFY_USER_ID is unset. The account that just authorized is
-<code>${escape_html(user_id)}</code> — set <code>SPOTIFY_USER_ID=${escape_html(user_id)}</code> to lock this route down.</p>`;
+        const bootstrap = `<p class="muted">Authorized as <code>${escape_html(user_id)}</code>.${
+          owner_id
+            ? ""
+            : ` Set <code>SPOTIFY_USER_ID=${escape_html(user_id)}</code> and uncomment the owner check in this route to lock it down.`
+        }</p>`;
 
         return page(
           200,
