@@ -1,4 +1,4 @@
-import { AdvancedImage } from "@cloudinary/react";
+import { AdvancedImage, lazyload } from "@cloudinary/react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { cldImage } from "@/lib/cloudinary";
 import type { CloudinaryImage } from "@/lib/entities";
@@ -23,6 +23,7 @@ const ArtCard = ({ art }: Props) => {
                 height={500}
                 alt="artwork"
                 className="w-full h-auto block"
+                plugins={[lazyload()]}
               />
             </button>
           }
@@ -34,6 +35,7 @@ const ArtCard = ({ art }: Props) => {
             cldImg={cldImage(art.public_id)}
             alt="artwork"
             className="max-h-[80vh] w-auto h-auto"
+            plugins={[lazyload()]}
           />
         </DialogContent>
       </Dialog>
