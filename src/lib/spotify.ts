@@ -19,11 +19,64 @@ interface Token {
   scope: string;
 }
 
+const redirect_uri = process.env.SPOTIFY_REDIRECT_URL || "";
+const client_id = process.env.SPOTIFY_CLIENT_ID || "";
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET || "";
+const state = process.env.SPOTIFY_STATE_SECRET || "";
+const token = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+
+export const request_spotify_auth = async () => {
+  await axios.post(
+    `https://accounts.spotify.com/authorize`,
+    new URLSearchParams({
+      client_id,
+      response_type: "code",
+      redirect_uri,
+      state,
+      scope: "user-read-recently-played",
+    }),
+  );
+};
+
+export const request_spotify_token = async (code: string) => {
+  const res = await axios.post<Token>(
+    `https://accounts.spotify.com/authorize`,
+    {
+      code,
+      grant_type: "authorization_code",
+      redirect_uri,
+    },
+    {
+      headers: {
+        Authorization: `Basic ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    },
+  );
+
+  const access_token_expiry = add(new Date(), { seconds: res.data.expires_in });
+  setCookie("access_token", res.data.access_token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    expires: access_token_expiry,
+    path: "/",
+  });
+
+  const refresh_token_expiry = add(new Date(), {
+    months: 6,
+  });
+  setCookie("refresh_token", res.data.refresh_token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    expires: refresh_token_expiry,
+    path: "/",
+  });
+};
+
 export async function refreshSpotifyToken(): Promise<string> {
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-  const client_id = process.env.SPOTIFY_CLIENT_ID;
-  const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-  const token = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
 
   const res = await axios.post<Token>(
     "https://accounts.spotify.com/api/token",
