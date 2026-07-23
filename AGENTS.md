@@ -87,9 +87,18 @@ No test suite is configured.
 
 **Server routes (`src/routes/api/`)** — `server.handlers` on `createFileRoute`:
 - `GET /api/media` — Cloudinary `portfolio` folder (Basic auth)
-- `GET /api/recently-played` — last 5 Spotify tracks; reads the `access_token`
-  httpOnly cookie, else refreshes it directly via `src/lib/spotify.ts`
-- `POST /api/spotify-auth` — refresh Spotify token → set httpOnly cookie
+- `GET /api/recently-played` — last 5 Spotify tracks; gets a token from
+  `getSpotifyAccessToken()` (`src/lib/spotify.ts`), which serves an in-memory
+  cached token or refreshes from `SPOTIFY_REFRESH_TOKEN`
+- `GET /api/spotify/login` — starts the Spotify Authorization Code flow: sets a
+  one-shot `spotify_auth_state` cookie, 302s to Spotify's consent screen
+- `GET /api/spotify/callback` — registered redirect URI; verifies `state` and
+  that the authorizing account is `SPOTIFY_USER_ID`, exchanges the `code` for
+  tokens, renders the new refresh token for you to copy into env
+
+No Spotify token is ever put in a visitor-facing cookie — this is a single-
+account widget shown to everyone, so the token has to stay on the server.
+`httpOnly` hides a cookie from JS but not from devtools.
 
 **Data fetching** — React Query hooks (`src/hooks/useCloudinary.ts`,
 `useRecentlyPlayed.ts`) call the internal API routes with axios. Same pattern as
@@ -116,9 +125,27 @@ handlers** (never at module scope — edge runtimes inject env per-request). Onl
 | `CLOUDINARY_CLOUD_NAME` | server | `GET /api/media` |
 | `CLOUDINARY_API_KEY` | server | `GET /api/media` |
 | `CLOUDINARY_API_SECRET` | server | `GET /api/media` |
-| `SPOTIFY_CLIENT_ID` | server | `POST /api/spotify-auth` |
-| `SPOTIFY_CLIENT_SECRET` | server | `POST /api/spotify-auth` |
-| `SPOTIFY_REFRESH_TOKEN` | server | `POST /api/spotify-auth` |
+| `SPOTIFY_CLIENT_ID` | server | `src/lib/spotify.ts` (all Spotify routes) |
+| `SPOTIFY_CLIENT_SECRET` | server | `src/lib/spotify.ts` (all Spotify routes) |
+| `SPOTIFY_REFRESH_TOKEN` | server | `refreshSpotifyToken()` — expires ~6 months |
+| `SPOTIFY_REDIRECT_URL` | server | auth + callback; must match the Spotify dashboard exactly |
+| `SPOTIFY_USER_ID` | server | `GET /api/spotify/callback` owner check |
+
+### Re-authorizing Spotify (~every 6 months)
+
+Spotify no longer issues indefinite refresh tokens. When the recently-played
+widget silently disappears, `/api/recently-played` is returning 401 and the
+refresh token needs replacing:
+
+1. Visit `/api/spotify/login` (locally: `http://127.0.0.1:3000/api/spotify/login`
+   — Spotify rejects `localhost` as a redirect host, so the loopback IP matters).
+2. Approve on Spotify with the account that owns the widget.
+3. Copy the refresh token off the callback page into `SPOTIFY_REFRESH_TOKEN` in
+   `.env` and in the host's env vars, then restart / redeploy.
+
+`SPOTIFY_REDIRECT_URL` must be registered verbatim in the Spotify dashboard, once
+per environment (`http://127.0.0.1:3000/api/spotify/callback` and
+`https://<domain>/api/spotify/callback`).
 
 ## Key migration decisions (Next.js → TanStack Start)
 
@@ -157,7 +184,7 @@ handlers** (never at module scope — edge runtimes inject env per-request). Onl
   see the `@tanstack/start-client-core#start-core/deployment` skill and add the
   matching Vite/Nitro preset.
 - Set all env vars from the table above in the host. `NODE_ENV=production` makes
-  the Spotify cookie `Secure` — serve over HTTPS.
+  the `spotify_auth_state` cookie `Secure` — serve over HTTPS.
 - `next/image` optimization is gone; images are served unoptimized. If image
   weight matters, add a Vite image plugin or use Cloudinary transforms for the
   local assets too.

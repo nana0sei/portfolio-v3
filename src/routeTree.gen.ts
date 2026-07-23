@@ -12,9 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DevIndexRouteImport } from './routes/dev/index'
 import { Route as ArtIndexRouteImport } from './routes/art/index'
-import { Route as ApiSpotifyAuthRouteImport } from './routes/api/spotify-auth'
 import { Route as ApiRecentlyPlayedRouteImport } from './routes/api/recently-played'
 import { Route as ApiMediaRouteImport } from './routes/api/media'
+import { Route as ApiSpotifyLoginRouteImport } from './routes/api/spotify/login'
+import { Route as ApiSpotifyCallbackRouteImport } from './routes/api/spotify/callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -31,11 +32,6 @@ const ArtIndexRoute = ArtIndexRouteImport.update({
   path: '/art/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiSpotifyAuthRoute = ApiSpotifyAuthRouteImport.update({
-  id: '/api/spotify-auth',
-  path: '/api/spotify-auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiRecentlyPlayedRoute = ApiRecentlyPlayedRouteImport.update({
   id: '/api/recently-played',
   path: '/api/recently-played',
@@ -46,31 +42,44 @@ const ApiMediaRoute = ApiMediaRouteImport.update({
   path: '/api/media',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSpotifyLoginRoute = ApiSpotifyLoginRouteImport.update({
+  id: '/api/spotify/login',
+  path: '/api/spotify/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSpotifyCallbackRoute = ApiSpotifyCallbackRouteImport.update({
+  id: '/api/spotify/callback',
+  path: '/api/spotify/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/media': typeof ApiMediaRoute
   '/api/recently-played': typeof ApiRecentlyPlayedRoute
-  '/api/spotify-auth': typeof ApiSpotifyAuthRoute
   '/art/': typeof ArtIndexRoute
   '/dev/': typeof DevIndexRoute
+  '/api/spotify/callback': typeof ApiSpotifyCallbackRoute
+  '/api/spotify/login': typeof ApiSpotifyLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/media': typeof ApiMediaRoute
   '/api/recently-played': typeof ApiRecentlyPlayedRoute
-  '/api/spotify-auth': typeof ApiSpotifyAuthRoute
   '/art': typeof ArtIndexRoute
   '/dev': typeof DevIndexRoute
+  '/api/spotify/callback': typeof ApiSpotifyCallbackRoute
+  '/api/spotify/login': typeof ApiSpotifyLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/media': typeof ApiMediaRoute
   '/api/recently-played': typeof ApiRecentlyPlayedRoute
-  '/api/spotify-auth': typeof ApiSpotifyAuthRoute
   '/art/': typeof ArtIndexRoute
   '/dev/': typeof DevIndexRoute
+  '/api/spotify/callback': typeof ApiSpotifyCallbackRoute
+  '/api/spotify/login': typeof ApiSpotifyLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -78,34 +87,38 @@ export interface FileRouteTypes {
     | '/'
     | '/api/media'
     | '/api/recently-played'
-    | '/api/spotify-auth'
     | '/art/'
     | '/dev/'
+    | '/api/spotify/callback'
+    | '/api/spotify/login'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/api/media'
     | '/api/recently-played'
-    | '/api/spotify-auth'
     | '/art'
     | '/dev'
+    | '/api/spotify/callback'
+    | '/api/spotify/login'
   id:
     | '__root__'
     | '/'
     | '/api/media'
     | '/api/recently-played'
-    | '/api/spotify-auth'
     | '/art/'
     | '/dev/'
+    | '/api/spotify/callback'
+    | '/api/spotify/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiMediaRoute: typeof ApiMediaRoute
   ApiRecentlyPlayedRoute: typeof ApiRecentlyPlayedRoute
-  ApiSpotifyAuthRoute: typeof ApiSpotifyAuthRoute
   ArtIndexRoute: typeof ArtIndexRoute
   DevIndexRoute: typeof DevIndexRoute
+  ApiSpotifyCallbackRoute: typeof ApiSpotifyCallbackRoute
+  ApiSpotifyLoginRoute: typeof ApiSpotifyLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -131,13 +144,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/spotify-auth': {
-      id: '/api/spotify-auth'
-      path: '/api/spotify-auth'
-      fullPath: '/api/spotify-auth'
-      preLoaderRoute: typeof ApiSpotifyAuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/recently-played': {
       id: '/api/recently-played'
       path: '/api/recently-played'
@@ -152,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiMediaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/spotify/login': {
+      id: '/api/spotify/login'
+      path: '/api/spotify/login'
+      fullPath: '/api/spotify/login'
+      preLoaderRoute: typeof ApiSpotifyLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/spotify/callback': {
+      id: '/api/spotify/callback'
+      path: '/api/spotify/callback'
+      fullPath: '/api/spotify/callback'
+      preLoaderRoute: typeof ApiSpotifyCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -159,9 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiMediaRoute: ApiMediaRoute,
   ApiRecentlyPlayedRoute: ApiRecentlyPlayedRoute,
-  ApiSpotifyAuthRoute: ApiSpotifyAuthRoute,
   ArtIndexRoute: ArtIndexRoute,
   DevIndexRoute: DevIndexRoute,
+  ApiSpotifyCallbackRoute: ApiSpotifyCallbackRoute,
+  ApiSpotifyLoginRoute: ApiSpotifyLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
