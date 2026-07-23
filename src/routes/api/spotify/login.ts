@@ -10,10 +10,39 @@ import { SPOTIFY_AUTH_STATE_COOKIE, request_spotify_auth } from "@/lib/spotify";
 //
 // Only the account owner can actually complete the flow — the callback checks
 // the authorizing account against SPOTIFY_USER_ID.
+
+// `localhost` and `127.0.0.1` are the same machine but *different cookie
+// origins*, so starting the flow on one and returning to the other silently
+// loses the state cookie. Normalize onto whichever the redirect URI uses.
+const LOOPBACK_HOSTNAMES = new Set(["localhost", "127.0.0.1", "[::1]", "::1"]);
+
 export const Route = createFileRoute("/api/spotify/login")({
   server: {
     handlers: {
-      GET: async () => {
+      GET: async ({ request }) => {
+        // Only ever act on requests that arrive over loopback, so this can
+        // never interfere with a proxied production host.
+        const current = new URL(request.url);
+        if (LOOPBACK_HOSTNAMES.has(current.hostname)) {
+          const canonical = new URL(process.env.SPOTIFY_REDIRECT_URL!);
+
+          if (!LOOPBACK_HOSTNAMES.has(canonical.hostname)) {
+            return new Response(
+              `SPOTIFY_REDIRECT_URL points at ${canonical.origin}, but you started the flow on ${current.origin}.\n` +
+                `The state cookie is origin-bound, so the callback would reject it.\n` +
+                `Start at ${canonical.origin}/api/spotify/login instead.`,
+              { status: 400, headers: { "Content-Type": "text/plain" } },
+            );
+          }
+
+          if (current.host !== canonical.host) {
+            return new Response(null, {
+              status: 302,
+              headers: { Location: `${canonical.origin}/api/spotify/login` },
+            });
+          }
+        }
+
         const state = randomBytes(32).toString("base64url");
 
         setCookie(SPOTIFY_AUTH_STATE_COOKIE, state, {

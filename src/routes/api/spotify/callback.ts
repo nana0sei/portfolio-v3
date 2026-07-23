@@ -93,7 +93,7 @@ export const Route = createFileRoute("/api/spotify/callback")({
         if (!expected_state || !state || state !== expected_state) {
           return error_page(
             400,
-            "State mismatch — this redirect did not come from /api/spotify/login, or it took longer than 10 minutes.",
+            `State mismatch — no matching cookie for this redirect. Either it did not come from /api/spotify/login, it took longer than 10 minutes, or the flow was started on a different host than ${new URL(request.url).origin} (cookies are per-origin, and localhost is a different origin from 127.0.0.1).`,
           );
         }
 
